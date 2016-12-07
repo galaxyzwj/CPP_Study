@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
 
 class Person
 {
@@ -10,25 +13,40 @@ private:
 	char *work;
 
 public:
-	void setName(char *n)
+	Person()
 	{
-		name = n;
+		cout << "Person()" << endl;
+	}
+
+	Person(char *name)
+	{
+		cout << "Person(char *name)" << endl;
+	}
+	Person(char *name, int age, char *work = "none") 
+	{
+		cout << "Person(char *name, int age)" << endl;
+		this->name = name;
+		this->age = age;
+		this->work = work;
+	}
+	void setName(char *name)
+	{
+		this->name = name;
 	}
 
 	void printInfo(void)
 	{
-		printf("name = %s, age = %d, work = %s\n", name, age, work);	
+		cout <<"name = " << name << ", age = " << age << ", work = " << work << endl;	
 	}
 };
 
 int main(int argc, char **argv)
 {
-	Person per;
+	Person per("zhangsan", 16);
+	Person per2;
 
-	//per.name = "zhangsan";
-	per.setName("zhangsan");
-
-
+	Person per3; /* int fun() */
+	
 	per.printInfo();
 	
 	return 0;
