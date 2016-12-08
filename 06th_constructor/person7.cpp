@@ -55,9 +55,16 @@ public:
 		strcpy(this->work, work);
 	}
 
-	void setName(char *name)
+	Person(Person &per) 
 	{
-		this->name = name;
+		cout << "Person(Person &per)" << endl;
+		this->age = per.age;
+		
+		this->name = new char[strlen(per.name) + 1];
+		strcpy(this->name, per.name);
+
+		this->work = new char[strlen(per.work) + 1];
+		strcpy(this->work, per.work);
 	}
 
 	void printInfo(void)
@@ -66,22 +73,14 @@ public:
 	}
 };
 
-void test_func()
-{
-	Person per("zhangsan", 16); // 出栈后自动被释放
-
-	Person *per7 = new Person("lisi", 18, "student");
-
-	//delete per7; /* 注释掉后new出来的空间虽然被释放，但析构函数中不会执行，无法释放*/
-
-}
 
 int main(int argc, char **argv)
 {
 	Person per("wanger", 13); // 程序结束后释放
-	test_func();
-	cout << "run test_fun end" << endl;
-    sleep(10);
+    Person per2(per);
+    Person per4("mazi", 25, "worker"); // 最先析构
+    per2.printInfo();
+
 	return 0;
 }
 	
