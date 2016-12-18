@@ -10,17 +10,23 @@ class Human {
 private:
     int a;
 public:
+    Human() { cout << "Human()"  << endl;}
     virtual void eating(void) { cout << "use hand to eat" << endl; }
+    virtual ~Human() { cout << "~Human()"  << endl;}
 };
 
 class Englishman : public Human {
 public:
+    Englishman() { cout << "Englishman()"  << endl;}    
     void eating(void) { cout << "use knife to eat" << endl; }
+    ~Englishman() { cout << "~Englishman()"  << endl;}
 };
 
 class Chinese : public Human {
 public:
+    Chinese() { cout << "Chinese()"  << endl;}        
     void eating(void) { cout << "use chopsticks to eat" << endl; }
+    ~Chinese() { cout << "~Chinese()"  << endl;}
 };
 
 void test_eating(Human& h)
@@ -31,17 +37,18 @@ void test_eating(Human& h)
 
 int  main(int argc, char **argv)
 {
-    Human h;
-    Englishman e;
-    Chinese c;
+    Human* h = new Human();
+    Englishman* e = new Englishman();
+    Chinese* c = new Chinese();
 
-    test_eating(h);
-    test_eating(e);
-    test_eating(c);    
+    Human *p[3] = {h, e, c};
+    int i;
 
-    cout << "sizeof(Human)= " << sizeof(h) << endl;
-    cout << "sizeof(Englishman)= " << sizeof(e) << endl;
-    cout << "sizeof(Chinese)= " << sizeof(c) << endl;
-    
+    for (i = 0; i < 3; i++) {
+        p[i]->eating();
+        delete p[i];
+    }
+
+
     return 0;
 }
